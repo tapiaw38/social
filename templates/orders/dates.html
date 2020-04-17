@@ -1,0 +1,44 @@
+{% extends 'base/base.html'%}
+
+{% block content%}
+{% csrf_token %}
+
+
+<div class="container">
+    <a href="{% url 'order_list'%}" class="btn btn-outline-primary">Volver</a>
+    <div class="row align-items-center pt-4">
+        {% if order %}
+        <div class="card offset-lg-3 col-lg-6 col-sm-12">
+            <div class="card-header">
+              SOLICITUD N° {{order.id}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-uppercase">{{order.last_name}} {{order.firts_name}}</h5>
+              <p>DNI: <strong>{{order.document}}</strong></p>
+              <p>CUIL: <strong>{{order.cuil}}</strong></p>
+              <p>DIRECCIÓN: <strong>{{order.address}}</strong></p>
+              <p>TEL.: <strong>{{order.phone_number}}</strong></p>
+              <p>DESCRIPCIÓN: <strong>{{order.description}}</strong></p>
+              <p>EMISIÓN: <strong>{{order.date_order}}Hs.</strong></p>
+            </div>
+            <div class="card-body">
+                {% if order.state == True%}
+                <h3 class="text-success">Aprobado</h3>
+                {% elif order.state == False%}
+                <h3 class="text-danger">Desaprobado</h3>
+                {% else %}
+                <h3 class="text-warning">Desconocido</h3>
+                {% endif %}
+                <p class="card-text">PEDIDO: <strong>{{order.order}}</strong></p>
+                <p>OBSERVACIÓN: <strong>{{order.observation}}</strong></p>
+                <p>FECHA DE ENTREGA: <strong>{{order.date_deliver}}</strong></p>
+                <p>LUGAR: <strong>{{order.place}}</strong></p>
+            </div>
+          </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock footer %}

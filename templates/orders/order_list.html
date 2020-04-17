@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %}
+{% load static%}
+
+{%block header%}
+{%endblock%}
+
+{% block content %}
+<div class="container pb-4 pt-4">
+<form class="form-inline my-2 my-lg-0" type="get" method="POST" action="{%url 'order_search_users'%}">
+ {% csrf_token %}
+    <input class="form-control mr-sm-3" type="text" placeholder="Search" name="search">
+    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" href="">Busqueda por DNI</button>
+</form>
+</div>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+    <tr class="table-primary" >
+        <td scope="col">#</td>
+        <td scope="col">Fecha</td>
+        <td scope="col">Nombre</td>
+        <td scope="col">Apellido</td>
+        <td scope="col">DNI</td>
+        <td scope="col">Cuil</td>
+        <td scope="col">Tel</td>
+        <td scope="col">Solicitud</td>
+        <td scope="col">Estado</td>
+        <td scope="col">Datos</td>
+        <td scope="col">Acciones</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% if object_list %}
+        {%for order in object_list%}
+            {% if order.state == True %}
+            <tr class="table-dark">
+            {% elif order.state == False %}
+            <tr class="table-danger">
+            {% else %}
+            <tr class="table-light">
+                    {% endif %}
+            <td>{{order.id}}</td>
+            <td>{{order.date_order}}</td>
+            <td>{{order.firts_name}}</td>
+            <td>{{order.last_name}}</td>
+            <td>{{order.document}}</td>
+            <td>{{order.cuil}}</td>
+            <!-- Tel -->
+            {% if order.phone_number == None %}
+            <td>Sin Celular</td>
+            {% else %}
+             <td>{{order.phone_number}}</td>
+            {% endif %}
+            <!-- Order -->
+            <td>{{order.order}}</td>
+            <!-- State -->
+            {% if order.state == False %}
+            <td>Desaprobado</td>
+            {% elif order.state == True %}
+             <td>Aprobado</td>
+            {% else %}
+            <td>Desconocido</td>
+            {% endif %}
+            <!-- Last Dates -->
+                <td>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Elegir</a>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item" href="{%url 'order_edit' order.id%}">Editar</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="{%url 'dates' order.id%}">Ver Más</a>
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+            <td><a class="btn btn-primary" href="{%url 'deliver_edit' order.id%}">Cargar</a></td>
+        </tr>
+        {%endfor%}
+        {% else %}
+        <div class="alert alert-dismissible alert-success col-lg-6">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Ups! </strong>tú registro esta vacio.
+        </div>
+        {%endif%}
+    </tbody>
+</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+      {% if object_list.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ object_list.previous_page_number }}">Previous</a></li>
+      {% endif%} {% if object_list.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ object_list.next_page_number }}">Next</a></li>
+      {% endif%}
+  </ul>
+</nav>
+</div>
+
+{% endblock%}
+
+{% block footer %}
+  
+{% endblock footer %}

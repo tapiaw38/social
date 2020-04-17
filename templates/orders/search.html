@@ -1,0 +1,38 @@
+{% extends 'base/base.html'%}
+
+{% block content%}
+{% csrf_token %}
+<div class="container pt-4 text-center ">
+    <div class="row align-items-center">
+        {% if order %}
+        <div class="card offset-lg-3 col-lg-6 col-sm-12">
+            <div class="card-header">
+              Solicitud N° {{order.id}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-uppercase">{{order.last_name}} {{order.firts_name}}</h5>
+              <p>Emisión: {{order.date_order}}Hs.</p>
+            </div>
+            <div class="card-body">
+            {% if order.state == True%}
+                <h3 class="text-success">Solicitud Aprobada</h3>
+                <p class="card-text">Pedido: {{order.order}}</p>
+                <p>{{order.observation}}</p>
+                <p>Fecha de entrega: {{order.date_deliver}}</p>
+                <p>Lugar: {{order.place}}</p>
+            {% elif order.state == False %}
+                <h3 class="text-warning">Solicitud Denegada</h3>
+                <p><strong>Observación</strong></p>
+                <p>{{order.observation}}</p>
+            {% else %}
+                <h3 class="text-primary">Estamos evaluando tú solicitud</h3>
+            {% endif %}
+            </div>
+          </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock footer %}

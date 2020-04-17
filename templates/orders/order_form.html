@@ -1,0 +1,28 @@
+{% extends 'base/base.html'%}
+
+{% block content%}
+
+<div class="container pt-4">
+    <div class="pb-4 pb-4">
+        <p><strong>Importante: </strong></p>
+        <ul>
+            <li>Solo podras realizar una solicitud por mes.</li>
+            <li>Verifica que tus datos esten correctos antes de enviar el formulario.</li>
+            <li>Podras seguir la gestion de tu solicitud con tu número de Cuil.</li>
+        </ul>
+    </div>
+    <div class="col col-lg-6 col-md-4 pb-4">
+        <h5 class="text-center text-lg-left pb-4">Formulario de Solicitud</h5>
+        <form method="post" class="pb-2">
+            {%csrf_token%}
+            {{form.as_p}}
+            <button class="btn btn-success btn-block" type="submit">Enviar</button>
+        </form>
+        <form class="form">
+            <a class="btn btn-primary btn-block" href="{%url 'index'%}">Salir</a>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
