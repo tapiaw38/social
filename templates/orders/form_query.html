@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container text-center pt-4 pb-4">
     <p>Ingresa al formulario de solicitudes con tú DNI.</p>
-    <p><strong>Importante: </strong>Solo podras realizar una solicitud por mes.</p>
+    <p><strong>Importante: </strong><code>Solo podras realizar una solicitud por mes.</code></p>
     <p></p>
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-12 text-center offset-lg-3">
@@ -15,6 +15,7 @@
                 <input class="mb-2 form-control mr-sm-2 mr-2" type="text" placeholder="Ingresar DNI" aria-label="Search" name="search">
                 <button class="btn btn-primary btn-block type="submit" href="" id="botonBus">Ingresar</button>
             </form>
+            <p class="mt-5 mb-3 text-muted text-center">&copy; Departamento de Informática 2020</p>
         </div>
     </div>
 </div>
@@ -23,7 +24,7 @@
 {% for message in messages%}
  <div class="alert alert-dismissible alert-warning pt-4 col-lg-8 col-sm-12 offset-lg-2">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Atenccion! </strong>{{message}}.
+    <strong>Atención! </strong>{{message}}.
 </div>
 {% endfor %}
 {% endif %}

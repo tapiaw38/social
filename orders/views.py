@@ -12,6 +12,7 @@ from django.conf import settings
 # Import Models and Forms
 from orders.models import Order
 from orders.forms import orderForm,deliverForm
+from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 
 class index(TemplateView):
@@ -23,11 +24,12 @@ class order_query(TemplateView):
 class form_query(TemplateView):
     template_name = 'orders/form_query.html'
 
-class order_create(CreateView):
+class order_create(SuccessMessageMixin,CreateView):
     model = Order
     form_class = orderForm
     template_name = 'orders/order_form.html'
     success_url = reverse_lazy('index')
+    success_message = 'Su formulario se envio con exito!'
 
 @login_required
 def order_edit(request,id):
@@ -79,12 +81,15 @@ def order_search(request):
     try:
         search = request.POST.get('search')
         if search == "" or len(search) < 8 or len(search) > 8:
-            messages.error(request, "Ingresa un número de Cuil valido sin puntos o guiones, si consideras que es un error ponte en ")
+            messages.error(request, "Ingresá tu número de DNI sin puntos, si consideras que es un error ponte en ")
+            return redirect("order_query")
+        elif not search.isdigit():
+            messages.error(request, "Ingresá tu número de DNI sin puntos, si consideras que es un error ponte en ")
             return redirect("order_query")
         elif search:
             order = Order.objects.get(document__exact=search)
     except Order.DoesNotExist:
-        messages.error(request, "No tenemos registrada una solicitud con este Cuil, si consideras que es un error ponte en ")
+        messages.error(request, "No tenemos registrada una solicitud con este DNI, si consideras que es un error ponte en ")
         return redirect('order_query')
     context = {'order':order}
     return render(request, 'orders/search.html',context)
@@ -93,11 +98,14 @@ def query_search(request):
     try:
         search = request.POST.get('search')
         if search == "" or len(search) < 8 or len(search) > 8:
-            messages.error(request, "Ingresa un número de DNI valido sin puntos")
+            messages.error(request, "Ingresá tu número de DNI sin puntos")
+            return redirect("form_query")
+        elif not search.isdigit():
+            messages.error(request, "Ingresá un DNI valido sin puntos")
             return redirect("form_query")
         elif search:
             order = Order.objects.get(document__exact=search)
-            messages.error(request, "Ya tenemos registrada una solicitud con este DNI")
+            messages.error(request, "Ya tenemos registrada una solicitud con este DNI.")
         return render(request, 'orders/form_query.html')
     except Order.DoesNotExist:
         return redirect("order_new")

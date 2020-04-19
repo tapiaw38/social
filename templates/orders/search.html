@@ -19,7 +19,7 @@
                 <p class="card-text text-uppercase">Pedido: {{order.order}}</p>
                 <p class="text-uppercase">{{order.observation}}</p>
                 {% if  order.detail == 'Entrega'%}
-                <p class="text-uppercase">Se te realizara la entrada el día {{order.date_deliver}}, en {{order.place}}.</p>
+                <p class="text-uppercase">Se te realizara la entrega el día {{order.date_deliver}}, en {{order.place}}.</p>
                 {% elif  order.detail == 'Visita'%}
                 <p class="text-uppercase">Recibiras una visita social el día {{order.date_deliver}}, en el domicilio informado, {{order.address}}.</p>
                 {% elif  order.detail == 'Entrevista'%}
@@ -39,6 +39,7 @@
           </div>
         {% endif %}
     </div>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; Departamento de Informática 2020</p>
 </div>
 {% endblock %}
 
