@@ -16,14 +16,22 @@
             <div class="card-body">
             {% if order.state == True%}
                 <h3 class="text-success">Solicitud Aprobada</h3>
-                <p class="card-text">Pedido: {{order.order}}</p>
-                <p>{{order.observation}}</p>
-                <p>Fecha de entrega: {{order.date_deliver}}</p>
-                <p>Lugar: {{order.place}}</p>
+                <p class="card-text text-uppercase">Pedido: {{order.order}}</p>
+                <p class="text-uppercase">{{order.observation}}</p>
+                {% if  order.detail == 'Entrega'%}
+                <p class="text-uppercase">Se te realizara la entrada el día {{order.date_deliver}}, en {{order.place}}.</p>
+                {% elif  order.detail == 'Visita'%}
+                <p class="text-uppercase">Recibiras una visita social el día {{order.date_deliver}}, en el domicilio informado, {{order.address}}.</p>
+                {% elif  order.detail == 'Entrevista'%}
+                <p class="text-uppercase">Tienes una entrevista el día {{order.date_deliver}}, en {{order.place}}, confirma tú asistencia en el siguiente   <a href="{%url 'contact'%}"><code>formulario</code></a>.</p>
+                {% endif %}
+   
             {% elif order.state == False %}
                 <h3 class="text-warning">Solicitud Denegada</h3>
+                {% if order.observation %}
                 <p><strong>Observación</strong></p>
-                <p>{{order.observation}}</p>
+                <p class="text-uppercase">{{order.observation}}</p>
+                {% endif %}
             {% else %}
                 <h3 class="text-primary">Estamos evaluando tú solicitud</h3>
             {% endif %}

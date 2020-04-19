@@ -5,14 +5,14 @@
 
 {% block content %}
 <div class="container text-center pt-4 pb-4">
-    <p>Consulta el estado de tu solicitud ingresando tu Cuil.</p>
-    <p><strong>Importante: </strong>Una vez aprobada tu solicitud se te informara lugar y fecha la entrega.</p>
+    <p>Consulta el estado de tu solicitud ingresando tu DNI.</p>
+    <p><strong>Importante: </strong>De acuerdo a tu solicitud se te informara si debes asistir a una entrevista, se te hara una visita social o se te realizara la entrega de lo solicitado.</p>
     <p></p>
     <div class="row align-items-center">
         <div class="col-lg-6 col-sm-12 text-center offset-lg-3">
             <form class="mt-2 mb-2 type="get" method="POST" action="{%url 'order_search'%}">
 {% csrf_token %}
-                <input class="mb-2 form-control mr-sm-2 mr-2" type="text" placeholder="Busqueda por Cuil" aria-label="Search" name="search" id="search">
+                <input class="mb-2 form-control mr-sm-2 mr-2" type="text" placeholder="Busqueda por DNI" aria-label="Search" name="search" id="search">
                 <button class="btn btn-primary btn-block type="submit" href="" id="botonBus">Consultar</button>
             </form>
         </div>

@@ -5,7 +5,12 @@
 
 
 <div class="container">
-    <a href="{% url 'order_list'%}" class="btn btn-outline-primary">Volver</a>
+  <div class="row pt-4">
+    <form class="form-inline">
+      <a href="{% url 'order_list'%}" class="btn btn-outline-primary mr-2 ml-2">Volver</a>
+      <a href="{%url 'order_edit' order.id%}" class="btn btn-outline-primary mr-2">Editar</a>
+    </form>
+  </div>
     <div class="row align-items-center pt-4">
         {% if order %}
         <div class="card offset-lg-3 col-lg-6 col-sm-12">
@@ -15,29 +20,70 @@
             <div class="card-body">
               <h5 class="card-title text-uppercase">{{order.last_name}} {{order.firts_name}}</h5>
               <p>DNI: <strong>{{order.document}}</strong></p>
-              <p>CUIL: <strong>{{order.cuil}}</strong></p>
               <p>DIRECCIÓN: <strong>{{order.address}}</strong></p>
+              {% if order.phone_number == None %}
+              <p>TEL.: <strong>No informo</strong></p>
+              {% else %}
               <p>TEL.: <strong>{{order.phone_number}}</strong></p>
+              {% endif %}
+              <p>PEDIDO: <strong>{{order.order}}</strong></p>
               <p>DESCRIPCIÓN: <strong>{{order.description}}</strong></p>
               <p>EMISIÓN: <strong>{{order.date_order}}Hs.</strong></p>
+              {% if order.picture %}
+              <p>IMAGEN ADJUNTA: </p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Ver imagen
+              </button>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Imagen adjunta</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                  <img src="{{order.picture.url}}" alt="" style="width: 100%; height: auto;">
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              {% endif %}
             </div>
             <div class="card-body">
-                {% if order.state == True%}
-                <h3 class="text-success">Aprobado</h3>
-                {% elif order.state == False%}
-                <h3 class="text-danger">Desaprobado</h3>
-                {% else %}
-                <h3 class="text-warning">Desconocido</h3>
-                {% endif %}
-                <p class="card-text">PEDIDO: <strong>{{order.order}}</strong></p>
-                <p>OBSERVACIÓN: <strong>{{order.observation}}</strong></p>
-                <p>FECHA DE ENTREGA: <strong>{{order.date_deliver}}</strong></p>
-                <p>LUGAR: <strong>{{order.place}}</strong></p>
+            <h5 class="card-title text-uppercase">ESTADO DE SOLICITUD</h5>
+              {% if order.state == False %}
+                    <h4 class="text-danger">Desaprobado</h4>
+                    <p>FECHA DE MODIFICACIÓN: <strong>{{order.date_modification}}</strong></p>
+                    <p>OBSERVACIÓN: <strong>{{order.observation}}</strong></p>
+                    {% elif order.state == True %}
+                    <h4 class="text-success">Aprobado</h4>
+                    <p>FECHA DE MODIFICACIÓN: <strong>{{order.date_modification}}</strong></p>
+                    <p>OBSERVACIÓN: <strong>{{order.observation}}</strong></p>
+                    {% else %}
+                    <h4 class="text-primary">Desconocido</h4>
+                    {% endif %}
+            </div>
+            <div class="card-body">
+              <a href="{%url 'deliver_edit' order.id%}" class="btn btn-success btn-block pt-2">Evaluar</a>
             </div>
           </div>
         {% endif %}
     </div>
 </div>
+
+
 {% endblock %}
 
 {% block footer %}

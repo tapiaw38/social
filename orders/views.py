@@ -39,7 +39,7 @@ def order_edit(request,id):
         if form.is_valid():
             form.save()
         return redirect('order_list')
-    return render(request, 'orders/order_form.html', {'form':form})
+    return render(request, 'orders/order_form_edit.html', {'form':form})
 
 @login_required
 def deliver_edit(request,id):
@@ -78,11 +78,11 @@ def order_search_users(request):
 def order_search(request):
     try:
         search = request.POST.get('search')
-        if search == "" or len(search) < 11 or len(search) > 11:
+        if search == "" or len(search) < 8 or len(search) > 8:
             messages.error(request, "Ingresa un número de Cuil valido sin puntos o guiones, si consideras que es un error ponte en ")
             return redirect("order_query")
         elif search:
-            order = Order.objects.get(cuil__exact=search)
+            order = Order.objects.get(document__exact=search)
     except Order.DoesNotExist:
         messages.error(request, "No tenemos registrada una solicitud con este Cuil, si consideras que es un error ponte en ")
         return redirect('order_query')
