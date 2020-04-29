@@ -1,5 +1,4 @@
-#!/home/muni/social/env/bin/python2
-
+#!/home/tapia/proyectos/social/env/bin/python2
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,4 +1,4 @@
-#!/home/muni/social/env/bin/python
+#!/home/tapia/proyectos/social/env/bin/python
 
 import sys
 import getopt
