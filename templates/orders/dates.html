@@ -22,13 +22,14 @@
               <p>DNI: <strong>{{order.document}}</strong></p>
               <p>DIRECCIÓN: <strong>{{order.address}}</strong></p>
               {% if order.phone_number == None %}
-              <p>TEL.: <strong>No informo</strong></p>
+              <p>TEL.: <strong>Sin informar</strong></p>
               {% else %}
               <p>TEL.: <strong>{{order.phone_number}}</strong></p>
               {% endif %}
               <p>PEDIDO: <strong>{{order.order}}</strong></p>
               <p>DESCRIPCIÓN: <strong>{{order.description}}</strong></p>
               <p>EMISIÓN: <strong>{{order.date_order}}Hs.</strong></p>
+
               {% if order.picture %}
               <p>IMAGEN ADJUNTA: </p>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -59,7 +60,7 @@
                       </div>
                     </div>
                   </div>
-              {% endif %}
+                {% endif %}
             </div>
             <div class="card-body">
             <h5 class="card-title text-uppercase">ESTADO DE SOLICITUD</h5>

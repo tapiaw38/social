@@ -22,5 +22,5 @@ class Order(models.Model):
     date_modification = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return '{} {}, DNI: {}, Cuil: {}'.format(self.firts_name,self.last_name,self.document,self.cuil)
+        return '{} {}, DNI: {}'.format(self.firts_name,self.last_name,self.document)
     
