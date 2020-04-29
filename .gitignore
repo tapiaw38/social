@@ -4,5 +4,6 @@ db.sqlite3
 /orders/migrations/
 /users/migrations/
 /media/
-/social/social/__pycache__
-/social/orders/__pycache__
+social/__pycache__
+orders/__pycache__
+users/__pycache__
