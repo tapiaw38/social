@@ -13,3 +13,14 @@
     border-radius: 50%;
     border: 1px solid red;
 }
+
+
+.content-wsp{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#btn.wsp{
+    display: block;
+}
