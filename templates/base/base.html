@@ -6,11 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/popper.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/efect.js' %}"></script>
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}"/>
-    <title>Desarrollo Social Tinogasta</title>
+    <title>Desarrollo y Hábitat Social Tinogasta</title>
   {% endblock %}
 </head>
 <body>
@@ -21,7 +23,7 @@
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
       <a href="{%url 'index'%}" class="navbar-brand">
-        <img src="{% static 'img/logo-desarrollo.png' %}" alt="" style="width: 50px; height: auto;"></a>
+        <img src="{% static 'img/logo-desarrollo.png' %}" alt="" style="width: 50px; height: auto;">Desarrollo y Hábitat Social</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,15 +37,9 @@
               Gestion
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{%url 'form_query'%}">Solicitudes</a>
-            <a class="dropdown-item" href="{%url 'order_query'%}">Consultas</a>
+            <a class="dropdown-item" href="{%url 'form_query'%}">Realizar una solicitud</a>
+            <a class="dropdown-item" href="{%url 'order_query'%}">Consultar estado de solicitudes</a>
           </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{%url 'contact'%}">Contacto</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{%url 'sign_in'%}">Administrador</a>
         </li>
         {% if perms.users.log_out %}
         <li class="nav-item">
@@ -51,6 +47,7 @@
         </li>
         {% endif %}
       </ul>
+      <a class="btn btn-outline-primary" href="{%url 'sign_in'%}">Administrador</a>
       {% if perms.users.log_out %}
       <a class="float-right btn btn-primary" href="{% url 'log_out'%}">Cerrar sesión</a>
       {% endif %}

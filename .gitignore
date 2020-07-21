@@ -7,3 +7,6 @@ db.sqlite3
 social/__pycache__
 orders/__pycache__
 users/__pycache__
+/env
+/.idea
+db.sqlite3

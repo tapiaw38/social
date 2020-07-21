@@ -9,7 +9,6 @@
                 <div class="text-center mb-4">
                   <img class="mb-4" src="{%static 'img/logo-desarrollo.png'%}" alt="" width="75" height="75">
                   <h1 class="h3 mb-3 font-weight-normal">Administrador</h1>
-                  <p>Si olvidaste tu contraseña envia un mail a <code> tapiaw38@gmail.com</code> para poder recuperarla. <a href=""> Por cualquier duda o consulta contactate con el administrador.</a></p>
                 </div>
                 {% if messages %}
                 {% for message in messages%}
@@ -19,21 +18,21 @@
                 {% endfor %}
                 {% endif %}
                 <div class="form-label-group">
-                  <input type="text" id="inputEmail" class="form-control" placeholder="User address" required autofocus name="username">
-                  <label for="inputEmail">User address</label>
+                  <input type="text" id="inputEmail" class="form-control" placeholder="User" required autofocus name="username">
+                  <label for="inputEmail">Nombre de usuario</label>
                 </div>
               
                 <div class="form-label-group">
                   <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
-                  <label for="inputPassword">Password</label>
+                  <label for="inputPassword">Contraseña</label>
                 </div>
               
                 <div class="checkbox mb-3">
                   <label>
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" value="remember-me"> Recuerdamé
                   </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Loggin</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
                 <p class="mt-5 mb-3 text-muted text-center">&copy; Departamento de Informática 2020</p>
               </form>
         </div>
