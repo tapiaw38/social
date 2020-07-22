@@ -57,7 +57,7 @@ def deliver_edit(request,id):
 
 @login_required
 def order_list(request):
-    order = Order.objects.all()
+    order = Order.objects.all().order_by("-created")
     paginator = Paginator(order, 7)
     page = request.GET.get('page')
     order = paginator.get_page(page)
@@ -121,7 +121,7 @@ def contact(request):
         subject = request.POST['asunto']
         msg = request.POST['msg']+' '+request.POST['email']
         email_from = settings.EMAIL_HOST_USER
-        recipient_list = ['vivianacortez_gim@hotmail.com']
+        recipient_list = ['tapiaw38@gmail.com']
         send_mail(subject,msg,email_from,recipient_list)
         messages.success(request, "Mensaje enviado correctamente")
         return render(request,'orders/contact.html')

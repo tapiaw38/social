@@ -10,3 +10,4 @@ users/__pycache__
 /env
 /.idea
 db.sqlite3
+/social/settings.py
