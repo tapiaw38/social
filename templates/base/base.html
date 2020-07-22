@@ -34,21 +34,22 @@
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Gestion
+            Gestión
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{%url 'form_query'%}">Realizar una solicitud</a>
+            <a class="dropdown-item" href="{%url 'form_query'%}">Solicitar asistencia social</a>
             <a class="dropdown-item" href="{%url 'order_query'%}">Consultar estado de solicitudes</a>
           </div>
         </li>
         {% if perms.users.log_out %}
         <li class="nav-item">
-          <a class="nav-link" href="{%url 'order_list'%}">Listado</a>
+          <a class="nav-link" href="{%url 'order_list'%}">Lista de solicitudes</a>
         </li>
         {% endif %}
       </ul>
+      {% if not perms.users.log_out %}
       <a class="btn btn-outline-primary" href="{%url 'sign_in'%}">Administrador</a>
-      {% if perms.users.log_out %}
+      {% else %}
       <a class="float-right btn btn-primary" href="{% url 'log_out'%}">Cerrar sesión</a>
       {% endif %}
     </div>
@@ -71,10 +72,11 @@
             </div>
           </footer>
   {% endblock %}
+  {% if not perms.users.log_out %}
   <div class="content-wsp">
     <a href="https://api.whatsapp.com/send?phone=+543837696921&text=Hola! " id="btn-wsp"><img src="{% static 'img/wsp.png' %}" alt="" width="75" height="75"></a>
   </div>
-
+  {% endif %}
   {% block js %}
 
   {% endblock %}
