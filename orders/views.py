@@ -57,7 +57,7 @@ def deliver_edit(request,id):
 
 @login_required
 def order_list(request):
-    order = Order.objects.all().order_by("-created")
+    order = Order.objects.all().order_by("-date_order")
     paginator = Paginator(order, 7)
     page = request.GET.get('page')
     order = paginator.get_page(page)
